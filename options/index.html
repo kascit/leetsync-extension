@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LeetSync Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-text">
+          <div class="eyebrow">LeetSync</div>
+          <h1>LeetCode to GitHub, frictionless</h1>
+          <p>Capture submissions in the browser and let the action keep your repo clean.</p>
+          <div class="actions">
+            <button id="saveBtn" class="btn primary">Save settings</button>
+            <button id="testBtn" class="btn ghost">Test connection</button>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="status">
+            <span id="statusDot" class="dot"></span>
+            <span id="statusText">Not configured</span>
+          </div>
+          <div class="metric">
+            <div class="label">Pending queue</div>
+            <div id="pendingCount" class="value">0</div>
+          </div>
+          <button id="syncPendingBtn" class="btn subtle">Sync pending now</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>GitHub connection</h2>
+        <div class="grid two">
+          <label class="field">
+            <span>Owner</span>
+            <input id="repoOwner" type="text" placeholder="your-user" />
+          </label>
+          <label class="field">
+            <span>Repo</span>
+            <input id="repoName" type="text" placeholder="leetcode-solutions" />
+          </label>
+          <label class="field">
+            <span>Default branch</span>
+            <input id="defaultBranch" type="text" placeholder="main" />
+          </label>
+          <label class="field">
+            <span>GitHub token</span>
+            <input id="githubToken" type="password" placeholder="ghp_..." />
+            <small>Fine-grained token with Contents: Read and Write for this repo only.</small>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Queue settings</h2>
+        <div class="grid two">
+          <label class="field">
+            <span>Queue branch</span>
+            <input id="queueBranch" type="text" placeholder="leetsync/queue" />
+          </label>
+          <label class="field">
+            <span>Queue path</span>
+            <input id="queuePath" type="text" placeholder=".leetsync/queue" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Sync behavior</h2>
+        <div class="grid two">
+          <label class="field">
+            <span>Output directory</span>
+            <input id="outputDir" type="text" placeholder="solutions" />
+          </label>
+          <label class="field">
+            <span>Sync mode</span>
+            <select id="syncMode">
+              <option value="incremental">Incremental</option>
+              <option value="ac">Accepted only</option>
+              <option value="all">All attempts</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid two compact">
+          <label class="check">
+            <input id="includeDate" type="checkbox" />
+            <span>Include date in filenames</span>
+          </label>
+          <label class="check">
+            <input id="includeStatus" type="checkbox" />
+            <span>Include status in filenames</span>
+          </label>
+          <label class="check">
+            <input id="readmeEnabled" type="checkbox" />
+            <span>Update per-problem README</span>
+          </label>
+          <label class="check">
+            <input id="fallbackEnabled" type="checkbox" />
+            <span>Enable LeetCode API fallback</span>
+          </label>
+        </div>
+        <details class="details">
+          <summary>PR settings</summary>
+          <div class="grid two">
+            <label class="check">
+              <input id="prEnabled" type="checkbox" />
+              <span>Create PR instead of direct push</span>
+            </label>
+            <label class="check">
+              <input id="prAutoMerge" type="checkbox" />
+              <span>Auto-merge if allowed</span>
+            </label>
+            <label class="field">
+              <span>Merge method</span>
+              <select id="prMergeMethod">
+                <option value="squash">Squash</option>
+                <option value="merge">Merge</option>
+                <option value="rebase">Rebase</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>PR title template</span>
+              <input id="prTitleTemplate" type="text" />
+            </label>
+            <label class="field full">
+              <span>PR body template</span>
+              <textarea id="prBodyTemplate" rows="3"></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>Action secrets</h2>
+        <p class="muted">These are optional unless you enable LeetCode API fallback in the action.</p>
+        <div class="grid two compact">
+          <div class="secret">
+            <div class="secret-name">LEETCODE_SESSION</div>
+            <button class="btn ghost copy" data-copy="LEETCODE_SESSION">Copy name</button>
+          </div>
+          <div class="secret">
+            <div class="secret-name">LEETCODE_CSRF_TOKEN</div>
+            <button class="btn ghost copy" data-copy="LEETCODE_CSRF_TOKEN">Copy name</button>
+          </div>
+        </div>
+        <div class="copy-block">
+          <div class="copy-header">
+            <span>Secrets block</span>
+            <button class="btn ghost copy" data-copy="LEETCODE_SESSION=\nLEETCODE_CSRF_TOKEN=">Copy block</button>
+          </div>
+          <pre id="secretBlock">LEETCODE_SESSION=
+LEETCODE_CSRF_TOKEN=</pre>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Config JSON</h2>
+        <p class="muted">Paste into leetsync.config.json in your repo.</p>
+        <div class="copy-block">
+          <div class="copy-header">
+            <span>leetsync.config.json</span>
+            <button id="copyConfigBtn" class="btn ghost">Copy config</button>
+          </div>
+          <pre id="configPreview" class="code"></pre>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="options.js"></script>
+  </body>
+</html>

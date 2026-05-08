@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LeetSync</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <div class="title">LeetSync</div>
+      <div class="status-row">
+        <span id="statusDot" class="dot"></span>
+        <span id="statusText">Not configured</span>
+      </div>
+      <div class="metric">
+        <div class="label">Pending</div>
+        <div id="pendingCount" class="value">0</div>
+      </div>
+      <div class="actions">
+        <button id="syncBtn" class="btn primary">Sync pending</button>
+        <button id="openOptionsBtn" class="btn ghost">Open settings</button>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
