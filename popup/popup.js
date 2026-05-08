@@ -21,7 +21,9 @@ function refreshStatus() {
 }
 
 syncBtn.addEventListener("click", () => {
-  ext.runtime.sendMessage({ type: "LEETSYNC_SYNC_PENDING" }, () => refreshStatus());
+  ext.runtime.sendMessage({ type: "LEETSYNC_SYNC_PENDING" }, () =>
+    refreshStatus(),
+  );
 });
 
 openOptionsBtn.addEventListener("click", () => {

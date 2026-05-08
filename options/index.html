@@ -12,7 +12,10 @@
         <div class="hero-text">
           <div class="eyebrow">LeetSync</div>
           <h1>LeetCode to GitHub, frictionless</h1>
-          <p>Capture submissions in the browser and let the action keep your repo clean.</p>
+          <p>
+            Capture submissions in the browser and let the action keep your repo
+            clean.
+          </p>
           <div class="actions">
             <button id="saveBtn" class="btn primary">Save settings</button>
             <button id="testBtn" class="btn ghost">Test connection</button>
@@ -27,7 +30,9 @@
             <div class="label">Pending queue</div>
             <div id="pendingCount" class="value">0</div>
           </div>
-          <button id="syncPendingBtn" class="btn subtle">Sync pending now</button>
+          <button id="syncPendingBtn" class="btn subtle">
+            Sync pending now
+          </button>
         </div>
       </header>
 
@@ -49,7 +54,10 @@
           <label class="field">
             <span>GitHub token</span>
             <input id="githubToken" type="password" placeholder="ghp_..." />
-            <small>Fine-grained token with Contents: Read and Write for this repo only.</small>
+            <small
+              >Fine-grained token with Contents: Read and Write for this repo
+              only.</small
+            >
           </label>
         </div>
       </section>
@@ -97,10 +105,6 @@
             <input id="readmeEnabled" type="checkbox" />
             <span>Update per-problem README</span>
           </label>
-          <label class="check">
-            <input id="fallbackEnabled" type="checkbox" />
-            <span>Enable LeetCode API fallback</span>
-          </label>
         </div>
         <details class="details">
           <summary>PR settings</summary>
@@ -131,29 +135,6 @@
             </label>
           </div>
         </details>
-      </section>
-
-      <section class="card">
-        <h2>Action secrets</h2>
-        <p class="muted">These are optional unless you enable LeetCode API fallback in the action.</p>
-        <div class="grid two compact">
-          <div class="secret">
-            <div class="secret-name">LEETCODE_SESSION</div>
-            <button class="btn ghost copy" data-copy="LEETCODE_SESSION">Copy name</button>
-          </div>
-          <div class="secret">
-            <div class="secret-name">LEETCODE_CSRF_TOKEN</div>
-            <button class="btn ghost copy" data-copy="LEETCODE_CSRF_TOKEN">Copy name</button>
-          </div>
-        </div>
-        <div class="copy-block">
-          <div class="copy-header">
-            <span>Secrets block</span>
-            <button class="btn ghost copy" data-copy="LEETCODE_SESSION=\nLEETCODE_CSRF_TOKEN=">Copy block</button>
-          </div>
-          <pre id="secretBlock">LEETCODE_SESSION=
-LEETCODE_CSRF_TOKEN=</pre>
-        </div>
       </section>
 
       <section class="card">

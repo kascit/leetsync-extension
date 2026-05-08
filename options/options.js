@@ -6,42 +6,38 @@ const DEFAULTS = {
     repo: {
       owner: "",
       name: "",
-      defaultBranch: "main"
+      defaultBranch: "main",
     },
     queue: {
       branch: "leetsync/queue",
-      path: ".leetsync/queue"
+      path: ".leetsync/queue",
     },
     output: {
       dir: "solutions",
       includeDate: true,
-      includeStatus: true
+      includeStatus: true,
     },
     readme: {
-      enabled: true
+      enabled: true,
     },
     sync: {
       mode: "incremental",
-      source: "queue"
     },
     pr: {
       enabled: true,
       autoMerge: true,
       mergeMethod: "squash",
       titleTemplate: "chore(leetcode): sync {count} submissions ({date})",
-      bodyTemplate: "Automated sync via LeetSync."
-    },
-    leetcode: {
-      enableFallback: false
+      bodyTemplate: "Automated sync via LeetSync.",
     },
     state: {
-      path: ".leetsync/state.json"
-    }
+      path: ".leetsync/state.json",
+    },
   },
   secrets: {
     githubToken: "",
-    githubApiBase: "https://api.github.com"
-  }
+    githubApiBase: "https://api.github.com",
+  },
 };
 
 const elements = {
@@ -62,7 +58,6 @@ const elements = {
   includeDate: document.getElementById("includeDate"),
   includeStatus: document.getElementById("includeStatus"),
   readmeEnabled: document.getElementById("readmeEnabled"),
-  fallbackEnabled: document.getElementById("fallbackEnabled"),
   prEnabled: document.getElementById("prEnabled"),
   prAutoMerge: document.getElementById("prAutoMerge"),
   prMergeMethod: document.getElementById("prMergeMethod"),
@@ -70,14 +65,19 @@ const elements = {
   prBodyTemplate: document.getElementById("prBodyTemplate"),
   copyConfigBtn: document.getElementById("copyConfigBtn"),
   configPreview: document.getElementById("configPreview"),
-  toast: document.getElementById("toast")
+  toast: document.getElementById("toast"),
 };
 
 function deepMerge(base, updates) {
   const output = Array.isArray(base) ? base.slice() : { ...base };
   if (!updates) return output;
   for (const [key, value] of Object.entries(updates)) {
-    if (value && typeof value === "object" && !Array.isArray(value) && typeof base[key] === "object") {
+    if (
+      value &&
+      typeof value === "object" &&
+      !Array.isArray(value) &&
+      typeof base[key] === "object"
+    ) {
       output[key] = deepMerge(base[key], value);
     } else {
       output[key] = value;
@@ -101,8 +101,7 @@ function buildConfig(settings) {
     readme: settings.readme,
     sync: settings.sync,
     pr: settings.pr,
-    leetcode: settings.leetcode,
-    state: settings.state
+    state: settings.state,
   };
 }
 
@@ -118,7 +117,6 @@ function applyForm(settings, secrets) {
   elements.includeDate.checked = settings.output.includeDate;
   elements.includeStatus.checked = settings.output.includeStatus;
   elements.readmeEnabled.checked = settings.readme.enabled;
-  elements.fallbackEnabled.checked = settings.leetcode.enableFallback || settings.sync.source === "both" || settings.sync.source === "leetcode";
   elements.prEnabled.checked = settings.pr.enabled;
   elements.prAutoMerge.checked = settings.pr.autoMerge;
   elements.prMergeMethod.value = settings.pr.mergeMethod;
@@ -127,49 +125,46 @@ function applyForm(settings, secrets) {
 }
 
 function readForm() {
-  const fallbackEnabled = elements.fallbackEnabled.checked;
-  const syncSource = fallbackEnabled ? "both" : "queue";
   const settings = {
     version: 1,
     repo: {
       owner: elements.repoOwner.value.trim(),
       name: elements.repoName.value.trim(),
-      defaultBranch: elements.defaultBranch.value.trim() || "main"
+      defaultBranch: elements.defaultBranch.value.trim() || "main",
     },
     queue: {
       branch: elements.queueBranch.value.trim() || "leetsync/queue",
-      path: elements.queuePath.value.trim() || ".leetsync/queue"
+      path: elements.queuePath.value.trim() || ".leetsync/queue",
     },
     output: {
       dir: elements.outputDir.value.trim() || "solutions",
       includeDate: elements.includeDate.checked,
-      includeStatus: elements.includeStatus.checked
+      includeStatus: elements.includeStatus.checked,
     },
     readme: {
-      enabled: elements.readmeEnabled.checked
+      enabled: elements.readmeEnabled.checked,
     },
     sync: {
       mode: elements.syncMode.value,
-      source: syncSource
     },
     pr: {
       enabled: elements.prEnabled.checked,
       autoMerge: elements.prAutoMerge.checked,
       mergeMethod: elements.prMergeMethod.value,
-      titleTemplate: elements.prTitleTemplate.value.trim() || "chore(leetcode): sync {count} submissions ({date})",
-      bodyTemplate: elements.prBodyTemplate.value.trim() || "Automated sync via LeetSync."
-    },
-    leetcode: {
-      enableFallback: fallbackEnabled
+      titleTemplate:
+        elements.prTitleTemplate.value.trim() ||
+        "chore(leetcode): sync {count} submissions ({date})",
+      bodyTemplate:
+        elements.prBodyTemplate.value.trim() || "Automated sync via LeetSync.",
     },
     state: {
-      path: ".leetsync/state.json"
-    }
+      path: ".leetsync/state.json",
+    },
   };
 
   const secrets = {
     githubToken: elements.githubToken.value.trim(),
-    githubApiBase: "https://api.github.com"
+    githubApiBase: "https://api.github.com",
   };
 
   return { settings, secrets };

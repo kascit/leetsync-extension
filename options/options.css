@@ -20,7 +20,8 @@ body {
   margin: 0;
   font-family: "Space Grotesk", "Newsreader", "Georgia", serif;
   color: var(--ink);
-  background: radial-gradient(1200px 600px at 20% -10%, #fff7e6 0%, transparent 60%),
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #fff7e6 0%, transparent 60%),
     radial-gradient(1000px 600px at 85% 0%, #e6f5ef 0%, transparent 60%),
     linear-gradient(180deg, var(--bg-1), var(--bg-2));
   min-height: 100vh;
@@ -245,7 +246,9 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .btn.primary {

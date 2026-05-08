@@ -38,8 +38,7 @@
     "sync": {
       "type": "object",
       "properties": {
-        "mode": { "type": "string", "enum": ["incremental", "ac", "all"] },
-        "source": { "type": "string", "enum": ["queue", "leetcode", "both"] }
+        "mode": { "type": "string", "enum": ["incremental", "ac", "all"] }
       }
     },
     "pr": {
@@ -47,16 +46,12 @@
       "properties": {
         "enabled": { "type": "boolean" },
         "autoMerge": { "type": "boolean" },
-        "mergeMethod": { "type": "string", "enum": ["squash", "merge", "rebase"] },
+        "mergeMethod": {
+          "type": "string",
+          "enum": ["squash", "merge", "rebase"]
+        },
         "titleTemplate": { "type": "string" },
         "bodyTemplate": { "type": "string" }
-      }
-    },
-    "leetcode": {
-      "type": "object",
-      "properties": {
-        "enableFallback": { "type": "boolean" },
-        "scriptPath": { "type": "string" }
       }
     },
     "state": {

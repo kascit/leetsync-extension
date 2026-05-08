@@ -4,10 +4,7 @@
   "version": "0.1.0",
   "description": "Sync LeetCode submissions to GitHub with minimal friction.",
   "permissions": ["storage"],
-  "host_permissions": [
-    "https://leetcode.com/*",
-    "https://api.github.com/*"
-  ],
+  "host_permissions": ["https://leetcode.com/*", "https://api.github.com/*"],
   "background": {
     "service_worker": "background.js",
     "type": "module"

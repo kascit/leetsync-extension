@@ -14,5 +14,8 @@ window.addEventListener("message", (event) => {
   if (event.source !== window) return;
   const data = event.data;
   if (!data || data.source !== "LEETSYNC" || data.type !== "SUBMISSION") return;
-  ext.runtime.sendMessage({ type: "LEETSYNC_SUBMISSION", payload: data.payload });
+  ext.runtime.sendMessage({
+    type: "LEETSYNC_SUBMISSION",
+    payload: data.payload,
+  });
 });
